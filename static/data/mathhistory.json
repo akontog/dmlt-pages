@@ -1,0 +1,112 @@
+[
+  {
+    "type": "person",
+    "anchor_year": -300,
+    "birth": -330,
+    "death": -260,
+    "display_date": "~300 π.Χ.",
+    "period": "Αρχαία Ελλάδα",
+    "name": "Ευκλείδης",
+    "description": "Συγγραφέας των «Στοιχείων», του πιο επιδραστικού μαθηματικού βιβλίου όλων των εποχών. Θεμελίωσε την αξιωματική μέθοδο στη Γεωμετρία.",
+    "youtube": "https://www.youtube.com/watch?v=xxxx",
+    "pdf": "https://example.com/euclid-elements.pdf"
+  },
+
+  {
+    "type": "person",
+    "anchor_year": -250,
+    "birth": -287,
+    "death": -212,
+    "display_date": "~250 π.Χ.",
+    "period": "Αρχαία Ελλάδα",
+    "name": "Αρχιμήδης",
+    "description": "Ένας από τους μεγαλύτερους μαθηματικούς και φυσικούς της αρχαιότητας. Συνέδεσε τη γεωμετρία με τη φυσική και εισήγαγε πρώιμες έννοιες ολοκληρωτικού λογισμού.",
+    "youtube": "https://www.youtube.com/watch?v=xxxx"
+  },
+
+  {
+    "type": "milestone",
+    "anchor_year": 1202,
+    "display_date": "1202 μ.Χ.",
+    "name": "Liber Abaci",
+    "description": "Ο Λεονάρντο της Πίζας (Φιμπονάτσι) εισάγει τα αραβικά ψηφία και το δεκαδικό σύστημα στην Ευρώπη."
+  },
+
+  {
+    "type": "person",
+    "anchor_year": 1690,
+    "birth": 1643,
+    "death": 1727,
+    "anchor_year": 1700,
+    "display_date": "1700 μ.Χ.",
+    "period": "17ος αιώνας",
+    "name": "Ισαάκ Νεύτων",
+    "description": "Συνδημιουργός του απειροστικού λογισμού και θεμελιωτής της κλασικής μηχανικής.",
+    "pdf": "https://example.com/principia.pdf"
+  },
+
+  {
+    "type": "person",
+    "anchor_year": 1690,
+    "birth": 1646,
+    "death": 1716,
+    "display_date": "1690 μ.Χ.",
+    "period": "17ος αιώνας",
+    "name": "Γκότφριντ Λάιμπνιτς",
+    "description": "Ανεξάρτητος συνδημιουργός του διαφορικού και ολοκληρωτικού λογισμού. Εισήγαγε τον σύγχρονο συμβολισμό.",
+    "youtube": "https://www.youtube.com/watch?v=xxxx"
+  },
+
+  {
+    "type": "person",
+    "anchor_year": 1750,
+    "birth": 1707,
+    "death": 1783,
+    "display_date": "1750 μ.Χ.",
+    "period": "18ος αιώνας",
+    "name": "Λέοναρντ Όιλερ",
+    "description": "Κεντρική μορφή των μαθηματικών. Εισήγαγε τη γραφή e^x, τη σχέση e^{iπ}+1=0 και συνέβαλε σε ανάλυση, θεωρία γραφημάτων και μηχανική.",
+    "youtube": "https://www.youtube.com/watch?v=xxxx",
+    "pdf": "https://example.com/euler.pdf"
+  },
+
+  {
+    "type": "milestone",
+    "anchor_year": 1821,
+    "display_date": "1821 μ.Χ.",
+    "name": "Αυστηροποίηση της Ανάλυσης",
+    "description": "Ο Κωσύ εισάγει αυστηρούς ορισμούς για όρια, συνέχεια και σύγκλιση."
+  },
+
+  {
+    "type": "person",
+    "anchor_year": 1830,
+    "birth": 1815,
+    "death": 1852,
+    "display_date": "1830 μ.Χ.",
+    "period": "19ος αιώνας",
+    "name": "Εβαρίστ Γκαλουά",
+    "description": "Θεμελιωτής της Θεωρίας Ομάδων και της σύγχρονης Άλγεβρας.",
+    "youtube": "https://www.youtube.com/watch?v=xxxx"
+  },
+
+  {
+    "type": "milestone",
+    "anchor_year": 1931,
+    "display_date": "1931",
+    "name": "Θεώρημα Ασυμπληρωσιμότητας",
+    "description": "Ο Κουρτ Γκέντελ αποδεικνύει ότι κάθε επαρκώς ισχυρό αξιωματικό σύστημα είναι εγγενώς ατελές."
+  },
+
+  {
+    "type": "person",
+    "anchor_year": 1936,
+    "birth": 1912,
+    "death": 1954,
+    "display_date": "1936",
+    "period": "20ός αιώνας",
+    "name": "Άλαν Τούρινγκ",
+    "description": "Θεμελιωτής της θεωρίας υπολογισιμότητας και της έννοιας του αλγορίθμου.",
+    "youtube": "https://www.youtube.com/watch?v=xxxx"
+  }
+]
