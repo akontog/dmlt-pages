@@ -1,3 +1,12 @@
+:root {
+  /* Brand / βασικό χρώμα 
+  --color-primary: #2a5298;
+  --color-primary-dark: #1e3c72;
+  */
+    --color-primary: #1e4f07;
+    --color-primary-dark: #145006;
+}
+
 /* Reset & Base */
 * {
     margin: 0;
@@ -20,7 +29,7 @@ body {
 
 /* Header */
 .site-header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
     color: white;
     padding: 2rem 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -83,7 +92,7 @@ body {
 
 /* Navigation */
 .main-nav {
-    background-color: #2a5298;
+    background-color: var(--color-primary);;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
@@ -116,7 +125,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #1e3c72;
+    background-color: var(--color-primary-dark);
     min-width: 220px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     z-index: 1000;
@@ -139,11 +148,11 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #2a5298;
+    background-color: var(--color-primary);
 }
 .nav-list a:hover,
 .nav-list a.active {
-    background-color: #1e3c72;
+    background-color: var(--color-primary-dark);
 }
 
 /* Main Content */
@@ -167,11 +176,11 @@ section {
 }
 
 section h2 {
-    color: #1e3c72;
+    color: var(--color-primary-dark);
     font-size: 1.8rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 3px solid #2a5298;
+    border-bottom: 3px solid var(--color-primary);
 }
 
 .lead {
@@ -201,7 +210,7 @@ section h2 {
     padding: 0.8rem;
     margin-bottom: 0.5rem;
     background-color: #f0f4f8;
-    border-left: 4px solid #2a5298;
+    border-left: 4px solid var(--color-primary);
     border-radius: 4px;
 }
 
@@ -227,7 +236,7 @@ section h2 {
 }
 
 .team-member h3 {
-    color: #1e3c72;
+    color: var(--color-primary-dark);
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
 }
@@ -238,7 +247,7 @@ section h2 {
 }
 
 .team-member .role strong {
-    color: #2a5298;
+    color: var(--color-primary);
 }
 .contact-links {
     display: flex;
@@ -253,7 +262,7 @@ section h2 {
     gap: 0.3rem;
     padding: 0.4rem 0.8rem;
     background-color: #e8f4f8;
-    color: #2a5298;
+    color: var(--color-primary);
     text-decoration: none;
     border-radius: 4px;
     font-size: 0.85rem;
@@ -261,13 +270,13 @@ section h2 {
 }
 
 .contact-link:hover {
-    background-color: #2a5298;
+    background-color: var(--color-primary);
     color: white;
     transform: translateY(-2px);
 }
 /* Footer */
 .site-footer {
-    background-color: #1e3c72;
+    background-color: var(--color-primary-dark);
     color: white;
     text-align: center;
     padding: 2rem 0;
@@ -332,7 +341,7 @@ section h2 {
     margin-left: 0.5rem;
     padding: 0.3rem 0.8rem;
     background-color: #e8f4f8;
-    color: #2a5298;
+    color: var(--color-primary);
     text-decoration: none;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -340,6 +349,6 @@ section h2 {
 }
 
 .pdf-link:hover {
-    background-color: #2a5298;
+    background-color: var(--color-primary);
     color: white;
 }
