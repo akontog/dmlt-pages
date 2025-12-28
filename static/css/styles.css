@@ -39,7 +39,7 @@ body {
 .header-logo {
     height: 80px;
     width: auto;
-    filter: brightness(0) invert(1);  /* Κάνει το logo λευκό */
+    /* filter: brightness(0) invert(1);  Κάνει το logo λευκό */
 }
 
 .header-text {
