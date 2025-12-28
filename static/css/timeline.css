@@ -1,4 +1,6 @@
-/* Κεντρικός άξονας */
+/* =========================
+   ΚΕΝΤΡΙΚΟΣ ΑΞΟΝΑΣ
+========================= */
 .timeline {
   position: relative;
   max-width: 900px;
@@ -16,31 +18,86 @@
   background: #ccc;
   transform: translateX(-50%);
 }
-/* Timeline items */
+
+/* =========================
+   TIMELINE ITEMS
+========================= */
 .timeline-item {
   position: relative;
   width: 50%;
   padding: 1.2rem 2rem;
   box-sizing: border-box;
+  --period-color: #2c3e50; /* fallback */
 }
 
-.timeline-item.left { left: 0; text-align: right; }
-.timeline-item.right { left: 50%; text-align: left; }
-/* Κουκίδα πάνω στη γραμμή */
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+/* =========================
+   ΟΡΙΖΟΝΤΙΑ ΓΡΑΜΜΗ ΣΥΝΔΕΣΗΣ
+========================= */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 1.85rem;
+  height: 2px;
+  background: var(--period-color);
+}
+
+.timeline-item.left::before {
+  right: -60px;
+  width: 60px;
+}
+
+.timeline-item.right::before {
+  left: -60px;
+  width: 60px;
+}
+
+/* =========================
+   ΚΟΥΚΙΔΑ ΣΤΟΝ ΑΞΟΝΑ
+========================= */
 .timeline-item::after {
   content: "";
   position: absolute;
   top: 1.4rem;
   width: 14px;
   height: 14px;
-  background: #2c3e50;
+  background: var(--period-color);
   border-radius: 50%;
   z-index: 2;
+  box-shadow: 0 0 0 4px var(--period-color);
 }
 
-.timeline-item.left::after { right: -7px; }
-.timeline-item.right::after { left: -7px; }
-/* Βελάκια προς τα κουτιά */
+.timeline-item.left::after {
+  right: -7px;
+}
+
+.timeline-item.right::after {
+  left: -7px;
+}
+
+/* =========================
+   ΚΑΡΤΑ ΠΕΡΙΕΧΟΜΕΝΟΥ
+========================= */
+.timeline-content {
+  background: #fff;
+  padding: 1rem 1.3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+/* =========================
+   ΒΕΛΑΚΙΑ ΠΡΟΣ ΤΗΝ ΚΑΡΤΑ
+========================= */
 .timeline-content::before {
   content: "";
   position: absolute;
@@ -50,29 +107,26 @@
 
 .timeline-item.left .timeline-content::before {
   right: -16px;
-  border-left-color: #fff;
+  border-left-color: var(--period-color);
 }
 
 .timeline-item.right .timeline-content::before {
   left: -16px;
-  border-right-color: #fff;
-}
-/* Κάρτες περιεχομένου */
-.timeline-content {
-  background: #fff;
-  padding: 1rem 1.3rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  position: relative;
+  border-right-color: var(--period-color);
 }
 
-/* Χρονολογία*/
+/* =========================
+   ΗΜΕΡΟΜΗΝΙΑ
+========================= */
 .timeline-date {
   font-weight: bold;
   font-size: 0.85rem;
   color: #555;
 }
-/* Άνθρωποι: { birth — death } brace*/
+
+/* =========================
+   LIFESPAN
+========================= */
 .lifespan {
   display: block;
   font-family: monospace;
@@ -84,26 +138,9 @@
 .lifespan::before { content: "{ "; }
 .lifespan::after { content: " }"; }
 
-/* Milestones */
-.timeline-item.milestone .timeline-content {
-  background: #fff8dc;
-  border-left: 4px solid gold;
-}
-
-.timeline-item.milestone::after {
-  background: gold;
-}
-.timeline-item.milestone h3 {
-  font-style: italic;
-}
-.milestone-content {
-  display: inline-block;
-  background: #fff8dc;
-  border: 2px solid gold;
-  padding: 1rem 1.5rem;
-}
-
-/* Περίοδοι & links*/
+/* =========================
+   PERIOD BADGE
+========================= */
 .period-badge {
   display: inline-block;
   background: #eee;
@@ -113,14 +150,59 @@
   margin: 0.3rem 0;
 }
 
+/* =========================
+   LINKS
+========================= */
 .timeline-links a {
   margin-right: 0.5rem;
   font-size: 0.85rem;
   text-decoration: none;
 }
-/* Responsive */
+
+/* =========================
+   MILESTONES
+========================= */
+.timeline-item.milestone .timeline-content {
+  background: #fff8dc;
+  border-left: 4px solid gold;
+}
+
+.timeline-item.milestone::before {
+  display: none;
+}
+
+.timeline-item.milestone::after {
+  background: gold;
+  width: 18px;
+  height: 18px;
+  top: 1.7rem;
+  box-shadow: 0 0 0 4px gold;
+}
+
+.timeline-item.milestone h3 {
+  font-style: italic;
+}
+
+/* =========================
+   ΧΡΩΜΑΤΑ ΠΕΡΙΟΔΩΝ
+========================= */
+.period-prehellenic      { --period-color: #7f8c8d; }
+.period-ancient_greek    { --period-color: #8e44ad; }
+.period-hellenistic_roman{ --period-color: #9b59b6; }
+.period-islamic          { --period-color: #27ae60; }
+.period-renaissance      { --period-color: #d35400; }
+.period-analysis_birth   { --period-color: #2980b9; }
+.period-modern_algebra   { --period-color: #e67e22; }
+.period-foundations      { --period-color: #c0392b; }
+.period-logic_cs         { --period-color: #16a085; }
+
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 768px) {
-  .timeline::before { left: 20px; }
+  .timeline::before {
+    left: 20px;
+  }
 
   .timeline-item {
     width: 100%;
@@ -129,11 +211,18 @@
     left: 0 !important;
   }
 
-  .timeline-item::after { left: 13px; }
+  .timeline-item::before {
+    left: 20px;
+    width: 30px;
+  }
+
+  .timeline-item::after {
+    left: 13px;
+  }
 
   .timeline-content::before {
     left: -16px;
-    border-right-color: #fff;
+    border-right-color: var(--period-color);
     border-left-color: transparent;
   }
 }
