@@ -216,6 +216,20 @@
   color: #777;
   margin-top: 0.3rem;
   line-height: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.img-attrib {
+  font-size: 0.75rem;
+  cursor: help;
+  color: #999;
+}
+
+.img-attrib:hover {
+  color: #333;
 }
 
 /* =========================
