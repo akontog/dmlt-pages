@@ -95,6 +95,12 @@
   position: relative;
 }
 
+.timeline-content::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 /* =========================
    ΒΕΛΑΚΙΑ ΠΡΟΣ ΤΗΝ ΚΑΡΤΑ
 ========================= */
@@ -136,7 +142,7 @@
 }
 
 .lifespan::before { content: "{ "; }
-.lifespan::after { content: " }"; }
+.lifespan::after  { content: " }"; }
 
 /* =========================
    PERIOD BADGE
@@ -184,22 +190,52 @@
 }
 
 /* =========================
+   IMAGE INSIDE TIMELINE CARD
+========================= */
+.timeline-figure {
+  max-width: 160px;
+  float: right;
+  margin: 0.2rem 0 0.5rem 1rem;
+  text-align: center;
+}
+
+.timeline-item.left .timeline-figure {
+  float: left;
+  margin: 0.2rem 1rem 0.5rem 0;
+}
+
+.timeline-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.timeline-figure figcaption {
+  font-size: 0.65rem;
+  color: #777;
+  margin-top: 0.3rem;
+  line-height: 1.2;
+}
+
+/* =========================
    ΧΡΩΜΑΤΑ ΠΕΡΙΟΔΩΝ
 ========================= */
-.period-prehellenic      { --period-color: #7f8c8d; }
-.period-ancient_greek    { --period-color: #8e44ad; }
-.period-hellenistic_roman{ --period-color: #9b59b6; }
-.period-islamic          { --period-color: #27ae60; }
-.period-renaissance      { --period-color: #d35400; }
-.period-analysis_birth   { --period-color: #2980b9; }
-.period-modern_algebra   { --period-color: #e67e22; }
-.period-foundations      { --period-color: #c0392b; }
-.period-logic_cs         { --period-color: #16a085; }
+.period-prehellenic       { --period-color: #7f8c8d; }
+.period-ancient_greek     { --period-color: #8e44ad; }
+.period-hellenistic_roman { --period-color: #9b59b6; }
+.period-islamic           { --period-color: #27ae60; }
+.period-renaissance       { --period-color: #d35400; }
+.period-analysis_birth    { --period-color: #2980b9; }
+.period-modern_algebra    { --period-color: #e67e22; }
+.period-foundations       { --period-color: #c0392b; }
+.period-logic_cs          { --period-color: #16a085; }
 
 /* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
+
   .timeline::before {
     left: 20px;
   }
@@ -224,5 +260,11 @@
     left: -16px;
     border-right-color: var(--period-color);
     border-left-color: transparent;
+  }
+
+  .timeline-figure {
+    float: none;
+    margin: 0.5rem auto;
+    max-width: 180px;
   }
 }
