@@ -232,6 +232,70 @@
   color: #333;
 }
 
+/* Container για τα icons */
+.timeline-icons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Κάθε icon button/link */
+.tl-icon {
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tl-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Τα images μέσα στα icons */
+.tl-icon img {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+/* Tooltip */
+.tl-icon .tooltip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 100;
+}
+
+.tl-icon:hover .tooltip {
+    opacity: 1;
+}
+
+/* Βελάκι στο tooltip (optional) */
+.tl-icon .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+}
 /* =========================
    ΧΡΩΜΑΤΑ ΠΕΡΙΟΔΩΝ
 ========================= */

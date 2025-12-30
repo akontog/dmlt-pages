@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close">&times;</button>
+    <div class="lightbox-content"></div>
+  </div>
+</div><!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
@@ -21,6 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
 <link rel="stylesheet" href="static/css/timeline.css">
+<link rel="stylesheet" href="static/css/lightbox.css">
 
 </head>
 <body>
@@ -45,7 +51,7 @@
             <li><a href="index.html" >Αρχική</a></li>
             <li><a href="team.html" >Ανθρώπινο Δυναμικό</a></li>
             <li class="dropdown">
-                <a href="#" >Δραστηριότητες ▼</a>
+                <a href="activities.html" >Δραστηριότητες ▼</a>
                 <ul class="dropdown-content">
                     <li><a href="projects.html">Προγράμματα</a></li>
                     <li><a href="theses.html">Πτυχιακές/Διπλωματικές</a></li>
@@ -75,6 +81,96 @@
         
         <div class="timeline-item
             left
+            
+            period-ancient_greek
+        ">
+
+            <div class="timeline-content">
+
+            <div class="timeline-inner">
+
+                
+                
+                <figure class="timeline-figure">
+            <img src="static/images/timeline/aristotle.jpeg"
+                alt="Προτομή του Αριστοτέλη από μάρμαρο. Ρωμαϊκό αντίγραφο μετά από ελληνικό μπρούντζινο πρωτότυπο του Λυσίππου από το 330 π.Χ.· η μανδύα από αλάβαστρο είναι σύγχρονη προσθήκη.">
+
+            
+            <figcaption>
+
+                
+                <span class="img-caption">Προτομή του Αριστοτέλη από μάρμαρο. Ρωμαϊκό αντίγραφο μετά από ελληνικό μπρούντζινο πρωτότυπο του Λυσίππου από το 330 π.Χ.· η μανδύα από αλάβαστρο είναι σύγχρονη προσθήκη.</span>
+                
+
+                
+                <span class="img-attrib"
+                        title="Από After Λύσιππος - Jastrow (2006), Κοινό Κτήμα, https://commons.wikimedia.org/w/index.php?curid=1359807">
+                    ⓘ
+                </span>
+                
+
+            </figcaption>
+            
+            </figure>
+
+                
+
+                
+                <div class="timeline-text">
+
+                
+                <span class="timeline-date">
+                    
+                    ~320 π.Χ.
+                </span>
+
+                
+                
+                <span class="lifespan">-384 – -322</span>
+                
+
+                
+                
+
+                
+                <h3>Αριστοτέλης</h3>
+                <p>Αρχαίος Έλληνας φιλόσοφος και επιστήμονας.</p>
+
+                <div class="timeline-icons">
+                    
+                    
+                        <button
+                            class="tl-icon lb-trigger"
+                            data-type="youtube"
+                            data-src="https://www.youtube.com/watch?v=l8jv5INBcns"
+                            title="YouTube video">
+                        <img src="static/images/logos/youtube.png" alt="youtube icon" class="youtube-logo">
+                        
+                        <span class="tooltip"> Αριστοτέλης - "Animated...Φιλόσοφοι" </span>
+                        
+                        </button>
+                    
+                    
+                    
+                    
+                    
+                </div> 
+            </div> 
+
+            </div> 
+
+            </div> 
+
+        </div> 
+
+    
+
+        
+        
+
+        
+        <div class="timeline-item
+            right
             
             period-ancient_greek
         ">
@@ -130,21 +226,33 @@
                 <h3>Ευκλείδης</h3>
                 <p>Συγγραφέας των «Στοιχείων», του πιο επιδραστικού μαθηματικού βιβλίου όλων των εποχών. Θεμελίωσε την αξιωματική μέθοδο στη Γεωμετρία.</p>
 
-                
-                
-                <div class="timeline-links">
-                    
-                    <a href="https://www.youtube.com/watch?v=xxxx" target="_blank"
-                    class="tl-link youtube">▶️ Video</a>
+                <div class="timeline-icons">
                     
                     
-                    <a href="https://example.com/euclid-elements.pdf" target="_blank"
-                    class="tl-link pdf">📄 PDF</a>
                     
-                </div>
-                
-
+                    
+                        <button
+                            class="tl-icon lb-trigger"
+                            data-type="pdf"
+                            data-src="https://example.com/euclid-elements.pdf"
+                            title="pdf document">
+                        <img src="static/images/logos/pdf.png" alt="pdf icon" class="pdf-logo">
+                        
+                        </button>
+                    
+                    
+                    
+                        <a href="https://personal.math.ubc.ca/~cass/Euclid/papyrus/papyrus.html " 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="tl-icon lb-trigger link-trigger"
+                        title="External link">
+                            <img src="static/images/logos/link.svg" alt="link icon" class="link-logo">
+                            
+                        </a>
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -163,7 +271,7 @@
 
         
         <div class="timeline-item
-            right
+            left
             
             period-hellenistic_roman
         ">
@@ -219,18 +327,15 @@
                 <h3>Αρχιμήδης</h3>
                 <p>Ένας από τους μεγαλύτερους μαθηματικούς και φυσικούς της αρχαιότητας. Συνέδεσε τη γεωμετρία με τη φυσική και εισήγαγε πρώιμες έννοιες ολοκληρωτικού λογισμού.</p>
 
-                
-                
-                <div class="timeline-links">
-                    
-                    <a href="https://www.youtube.com/watch?v=xxxx" target="_blank"
-                    class="tl-link youtube">▶️ Video</a>
+                <div class="timeline-icons">
                     
                     
-                </div>
-                
-
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -245,7 +350,7 @@
 
         
         <div class="timeline-item
-            left
+            right
             milestone
             period-hellenistic_roman
         ">
@@ -276,10 +381,15 @@
                 <h3>Κόσκινο του Ερατοσθένη</h3>
                 <p>Αλγόριθμος για την εύρεση όλων των πρώτων αριθμών μέχρι κάποιον ακέραιο.</p>
 
-                
-                
-
+                <div class="timeline-icons">
+                    
+                    
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -298,7 +408,7 @@
 
         
         <div class="timeline-item
-            right
+            left
             milestone
             period-islamic
         ">
@@ -329,10 +439,15 @@
                 <h3>Liber Abaci</h3>
                 <p>Ο Λεονάρντο της Πίζας (Φιμπονάτσι) εισάγει τα αραβικά ψηφία και το δεκαδικό σύστημα στην Ευρώπη.</p>
 
-                
-                
-
+                <div class="timeline-icons">
+                    
+                    
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -351,7 +466,7 @@
 
         
         <div class="timeline-item
-            left
+            right
             
             period-analysis_birth
         ">
@@ -407,18 +522,15 @@
                 <h3>Γκότφριντ Λάιμπνιτς</h3>
                 <p>Συνδημιουργός του διαφορικού και ολοκληρωτικού λογισμού. Εισήγαγε τον σύγχρονο συμβολισμό.</p>
 
-                
-                
-                <div class="timeline-links">
-                    
-                    <a href="https://www.youtube.com/watch?v=xxxx" target="_blank"
-                    class="tl-link youtube">▶️ Video</a>
+                <div class="timeline-icons">
                     
                     
-                </div>
-                
-
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -433,7 +545,7 @@
 
         
         <div class="timeline-item
-            right
+            left
             
             period-analysis_birth
         ">
@@ -489,18 +601,24 @@
                 <h3>Ισαάκ Νεύτων</h3>
                 <p>Συνδημιουργός του απειροστικού λογισμού και θεμελιωτής της κλασικής μηχανικής.</p>
 
-                
-                
-                <div class="timeline-links">
+                <div class="timeline-icons">
                     
                     
-                    <a href="https://example.com/principia.pdf" target="_blank"
-                    class="tl-link pdf">📄 PDF</a>
                     
-                </div>
-                
-
+                    
+                        <button
+                            class="tl-icon lb-trigger"
+                            data-type="pdf"
+                            data-src="https://example.com/principia.pdf"
+                            title="pdf document">
+                        <img src="static/images/logos/pdf.png" alt="pdf icon" class="pdf-logo">
+                        
+                        </button>
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -515,7 +633,7 @@
 
         
         <div class="timeline-item
-            left
+            right
             milestone
             period-analysis_birth
         ">
@@ -569,10 +687,15 @@
                 <h3>Οι γέφυρες του Königsberg</h3>
                 <p>Το διάσημο ιστορικό πρόβλημα «των Επτά Γεφυρών της Κένιγκσμπεργκ» αφορά την ύπαρξη ή μη μιας διαδρομής που να διασχίζει κάθε μία από τις επτά γέφυρες της πόλης ακριβώς μία φορά, επιστρέφοντας ή όχι στο σημείο εκκίνησης, και αποτέλεσε τον κινητήριο μοχλό για τη γέννηση της Θεωρίας Γραφημάτων από τον Λέοναρντ Όιλερ το 1736.</p>
 
-                
-                
-
+                <div class="timeline-icons">
+                    
+                    
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -587,7 +710,7 @@
 
         
         <div class="timeline-item
-            right
+            left
             
             period-analysis_birth
         ">
@@ -621,21 +744,24 @@
                 <p>Κεντρική μορφή των μαθηματικών. Εισήγαγε τη γραφή \( e^x \), τη σχέση \( e^{i\pi}+1=0 \).
 και συνέβαλε σε ανάλυση, θεωρία γραφημάτων και μηχανική.</p>
 
-                
-                
-                <div class="timeline-links">
-                    
-                    <a href="https://www.youtube.com/watch?v=xxxx" target="_blank"
-                    class="tl-link youtube">▶️ Video</a>
+                <div class="timeline-icons">
                     
                     
-                    <a href="https://example.com/euler.pdf" target="_blank"
-                    class="tl-link pdf">📄 PDF</a>
                     
-                </div>
-                
-
+                    
+                        <button
+                            class="tl-icon lb-trigger"
+                            data-type="pdf"
+                            data-src="https://example.com/euler.pdf"
+                            title="pdf document">
+                        <img src="static/images/logos/pdf.png" alt="pdf icon" class="pdf-logo">
+                        
+                        </button>
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -654,7 +780,7 @@
 
         
         <div class="timeline-item
-            left
+            right
             milestone
             period-modern_algebra
         ">
@@ -685,10 +811,15 @@
                 <h3>Αυστηροποίηση της Ανάλυσης</h3>
                 <p>Ο Κωσύ εισάγει αυστηρούς ορισμούς για όρια, συνέχεια και σύγκλιση.</p>
 
-                
-                
-
+                <div class="timeline-icons">
+                    
+                    
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -703,7 +834,7 @@
 
         
         <div class="timeline-item
-            right
+            left
             
             period-modern_algebra
         ">
@@ -736,18 +867,15 @@
                 <h3>Εβαρίστ Γκαλουά</h3>
                 <p>Θεμελιωτής της Θεωρίας Ομάδων και της σύγχρονης Άλγεβρας.</p>
 
-                
-                
-                <div class="timeline-links">
-                    
-                    <a href="https://www.youtube.com/watch?v=xxxx" target="_blank"
-                    class="tl-link youtube">▶️ Video</a>
+                <div class="timeline-icons">
                     
                     
-                </div>
-                
-
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -766,7 +894,7 @@
 
         
         <div class="timeline-item
-            left
+            right
             milestone
             period-logic_cs
         ">
@@ -797,10 +925,15 @@
                 <h3>Θεώρημα Ασυμπληρωσιμότητας</h3>
                 <p>Ο Κουρτ Γκέντελ αποδεικνύει ότι κάθε επαρκώς ισχυρό αξιωματικό σύστημα είναι εγγενώς ατελές.</p>
 
-                
-                
-
+                <div class="timeline-icons">
+                    
+                    
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -815,7 +948,7 @@
 
         
         <div class="timeline-item
-            right
+            left
             
             period-logic_cs
         ">
@@ -848,18 +981,15 @@
                 <h3>Άλαν Τούρινγκ</h3>
                 <p>Θεμελιωτής της θεωρίας υπολογισιμότητας και της έννοιας του αλγορίθμου.</p>
 
-                
-                
-                <div class="timeline-links">
-                    
-                    <a href="https://www.youtube.com/watch?v=xxxx" target="_blank"
-                    class="tl-link youtube">▶️ Video</a>
+                <div class="timeline-icons">
                     
                     
-                </div>
-                
-
+                    
+                    
+                    
+                    
                 </div> 
+            </div> 
 
             </div> 
 
@@ -885,5 +1015,9 @@
         <p>Καρλόβασι, Σάμος</p>
     </div>
 </footer>
+
+    
+<script src="static/js/lightbox.js"></script>
+
 </body>
 </html>
