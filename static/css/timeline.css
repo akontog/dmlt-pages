@@ -23,7 +23,7 @@
    TIMELINE ITEMS
 ========================= */
 .timeline-item {
-  position: relative;
+  position: absolute;
   width: 50%;
   padding: 1.2rem 2rem;
   box-sizing: border-box;
@@ -299,6 +299,8 @@
 /* =========================
    ΧΡΩΜΑΤΑ ΠΕΡΙΟΔΩΝ
 ========================= */
+.period-stone_age         { --period-color: #95a5a6; }
+.period-bronze_age        { --period-color: #b87333; }
 .period-prehellenic       { --period-color: #7f8c8d; }
 .period-ancient_greek     { --period-color: #8e44ad; }
 .period-hellenistic_roman { --period-color: #9b59b6; }
@@ -308,6 +310,81 @@
 .period-modern_algebra    { --period-color: #e67e22; }
 .period-foundations       { --period-color: #c0392b; }
 .period-logic_cs          { --period-color: #16a085; }
+
+/* Period Heading */
+.period-heading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  background: var(--period-color);
+  opacity: 0.85;
+  z-index: 2;
+  border-left: 4px solid var(--period-color);
+}
+
+/* Grid line colors by period */
+.timeline-grid-line.period-prehellenic       { background: rgba(127, 140, 141, 0.08); }
+.timeline-grid-line.period-prehellenic.major { background: rgba(127, 140, 141, 0.18); }
+.timeline-grid-line.period-ancient_greek     { background: rgba(142, 68, 173, 0.08); }
+.timeline-grid-line.period-ancient_greek.major { background: rgba(142, 68, 173, 0.18); }
+.timeline-grid-line.period-hellenistic_roman { background: rgba(155, 89, 182, 0.08); }
+.timeline-grid-line.period-hellenistic_roman.major { background: rgba(155, 89, 182, 0.18); }
+.timeline-grid-line.period-islamic           { background: rgba(39, 174, 96, 0.08); }
+.timeline-grid-line.period-islamic.major     { background: rgba(39, 174, 96, 0.18); }
+.timeline-grid-line.period-renaissance       { background: rgba(211, 84, 0, 0.08); }
+.timeline-grid-line.period-renaissance.major { background: rgba(211, 84, 0, 0.18); }
+.timeline-grid-line.period-analysis_birth    { background: rgba(41, 128, 185, 0.08); }
+.timeline-grid-line.period-analysis_birth.major { background: rgba(41, 128, 185, 0.18); }
+.timeline-grid-line.period-modern_algebra    { background: rgba(230, 126, 34, 0.08); }
+.timeline-grid-line.period-modern_algebra.major { background: rgba(230, 126, 34, 0.18); }
+.timeline-grid-line.period-foundations       { background: rgba(192, 57, 43, 0.08); }
+.timeline-grid-line.period-foundations.major { background: rgba(192, 57, 43, 0.18); }
+.timeline-grid-line.period-logic_cs          { background: rgba(22, 160, 133, 0.08); }
+.timeline-grid-line.period-logic_cs.major    { background: rgba(22, 160, 133, 0.18); }
+
+.timeline-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.06);
+}
+
+.timeline-grid-label {
+  position: absolute;
+  left: -80px;
+  top: -0.6em;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Major / minor grid line styles */
+.timeline-grid-line.major {
+  background: rgba(0,0,0,0.18);
+  height: 2px;
+}
+
+.timeline-grid-line.minor {
+  background: rgba(0,0,0,0.04);
+  height: 1px;
+}
+
+/* Container for grid lines to align with timeline */
+.timeline-grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.timeline-item { z-index: 3; }
+
 
 /* =========================
    RESPONSIVE
@@ -319,6 +396,7 @@
   }
 
   .timeline-item {
+    position: absolute;
     width: 100%;
     padding-left: 60px;
     text-align: left;
