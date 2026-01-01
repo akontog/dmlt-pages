@@ -10,13 +10,7 @@
 
 .timeline::before {
   content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: #ccc;
-  transform: translateX(-50%);
+  display: none; /* removed center vertical line per request */
 }
 
 /* =========================
@@ -321,7 +315,7 @@
   font-size: 1rem;
   color: white;
   background: var(--period-color);
-  opacity: 0.85;
+  opacity: 0.35;
   z-index: 2;
   border-left: 4px solid var(--period-color);
 }
@@ -369,8 +363,8 @@
 }
 
 .timeline-grid-line.minor {
-  background: rgba(0,0,0,0.04);
-  height: 1px;
+  background: rgba(0,0,0,0.10);
+  height: 1.5px;
 }
 
 /* Container for grid lines to align with timeline */
@@ -385,6 +379,84 @@
 
 .timeline-item { z-index: 3; }
 
+
+/* Compact item (small vertical line with optional thumb/name) */
+.compact-item {
+  position: absolute;
+  max-width: 220px;
+  width: fit-content;
+  min-width: 140px;
+  transition: transform 0.3s ease;
+}
+.compact-item{ left:50%; transform: translateX(var(--init-offset, 0px)); }
+.compact-item.left { /* kept for compatibility */ }
+.compact-item.right { /* kept for compatibility */ }
+.compact-line {
+  width: 4px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.03);
+}
+.compact-trigger{ background: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap:0.5rem; }
+.compact-thumb{ width:36px; height:36px; object-fit:cover; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.15);} 
+.compact-name{ font-size:0.85rem; color:#333; }
+.compact-item.person { flex-direction: row; width: 220px; align-items: flex-start; }
+.compact-item.person .compact-thumb { width:56px; height:56px; }
+.line-wrap{ position: relative; width: 12px; display:flex; align-items:flex-start; justify-content:center; }
+.line-wrap .compact-line { width:4px; }
+.compact-name.vertical{ position: relative; left: 0; top: auto; transform: none; writing-mode: horizontal-tb; text-orientation: mixed; display:block; font-size:0.95rem; }
+.compact-item{ cursor: pointer; }
+
+/* Compact box: solid colored card with image above name */
+.compact-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  min-width: 120px;
+  max-width: 200px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.compact-box-img{ width:64px; height:64px; object-fit:cover; border-radius:6px; margin-bottom:0.35rem; }
+.compact-box-name{ font-weight:700; text-align:center; font-size:0.95rem; line-height:1.05; }
+.compact-box-year{ font-size:0.8rem; opacity:0.95; font-weight:400; margin-top:0.15rem; }
+
+/* life-span (birth->death) visuals */
+.life-item { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
+.life-birth-img { box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
+.life-person .life-wrap { display:flex; align-items:flex-start; }
+.life-wrap .life-line { width:4px; border-radius:3px; min-height:8px; box-shadow: 0 0 0 4px rgba(0,0,0,0.02); }
+.life-meta .life-name { font-weight:700; font-size:0.95rem; color:#222; }
+.life-meta .lifespan { font-size:0.85rem; color:#666; margin-top:4px; }
+
+/* Popup modal */
+#tl-popup{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:10000; }
+#tl-popup.active{ display:flex; }
+.tl-popup-inner{ background:white; padding:1rem; border-radius:8px; max-width:820px; width:92%; max-height:86vh; overflow:auto; box-shadow:0 10px 30px rgba(0,0,0,0.2); position:relative; }
+.tl-popup-close{ position:absolute; right:1rem; top:1rem; background:transparent; border:none; font-size:1.4rem; cursor:pointer; }
+.tl-popup-content img{ max-width:100%; height:auto; display:block; margin-bottom:0.6rem; cursor:zoom-in; }
+
+/* Popup two-column layout */
+.popup-row{ display:flex; gap:1rem; align-items:flex-start; }
+.popup-left{ flex:0 0 220px; }
+.popup-left img{ width:100%; height:auto; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.12); }
+.popup-right{ flex:1 1 auto; }
+.popup-icons{ display:flex; gap:0.6rem; justify-content:flex-end; margin-top:0.8rem; }
+.popup-icons .tl-icon{ padding:0.35rem; }
+
+@media (max-width:600px){ .popup-row{ flex-direction:column; } .popup-left{ width:100%; } }
+
+/* Milestone compact box */
+.milestone-box{ display:flex; align-items:center; gap:0.6rem; background:rgba(255,255,255,0.95); padding:0.25rem 0.5rem; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.06);} 
+.milestone-box img{ width:48px; height:48px; object-fit:cover; border-radius:6px; }
+.ms-meta{ display:flex; flex-direction:column; font-size:0.85rem; }
+.ms-name{ font-weight:700; }
+.ms-year{ font-size:0.8rem; color:#666; }
+
+/* vertical name along line for persons */
+.compact-name.vertical{ writing-mode: vertical-rl; text-orientation:mixed; transform:translateY(0); font-size:0.85rem; }
 
 /* =========================
    RESPONSIVE

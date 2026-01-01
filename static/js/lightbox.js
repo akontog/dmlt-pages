@@ -10,14 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const host = url.hostname.replace('www.', '');
 
       if (host.includes('youtube.com')) {
-        // If it's already an /embed/ URL, just ensure autoplay
         if (url.pathname.startsWith('/embed/')) {
           url.searchParams.set('autoplay', '1');
           return url.toString();
         }
-        // standard watch?v=ID
         const id = url.searchParams.get('v');
-        url.searchParams.delete('v');
         const extra = url.searchParams.toString();
         return 'https://www.youtube.com/embed/' + id + (extra ? '?' + extra + '&autoplay=1' : '?autoplay=1');
       }
@@ -28,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return 'https://www.youtube.com/embed/' + id + (extra ? '?' + extra + '&autoplay=1' : '?autoplay=1');
       }
 
-      // fallback: if contains watch?v= pattern
       if (src.includes('watch?v=')) {
         let s = src.replace('watch?v=', 'embed/');
         return s + (s.includes('?') ? '&autoplay=1' : '?autoplay=1');
@@ -45,60 +41,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  document.querySelectorAll('.lb-trigger').forEach(el => {
-    el.addEventListener('click', (e) => {
-      const type = el.dataset.type;
-      let src = el.dataset.src;
+  // Use event delegation so dynamically inserted .lb-trigger elements work
+  document.body.addEventListener('click', (e) => {
+    const el = e.target.closest('.lb-trigger');
+    if (!el) return;
 
-      // If this is an anchor without a data-src/type, allow default navigation
-      if (el.tagName.toLowerCase() === 'a' && !type && !src) return;
+    const type = el.dataset.type;
+    let src = el.dataset.src;
 
-      // prevent navigation for triggers that provide a source
-      if (el.tagName.toLowerCase() === 'a' || el.tagName.toLowerCase() === 'button') {
-        e.preventDefault();
-      }
+    if (el.tagName.toLowerCase() === 'a' && !type && !src) return;
+    if (el.tagName.toLowerCase() === 'a' || el.tagName.toLowerCase() === 'button') {
+      e.preventDefault();
+    }
 
-      content.innerHTML = '';
+    content.innerHTML = '';
 
-      if (type === 'youtube' && src) {
-        const embed = buildYouTubeEmbed(src);
-        // keep original watch URL for fallback
-        let original = src;
-        try {
-          const u = new URL(src);
-          if (u.hostname.includes('youtu.be')) {
-            const id = u.pathname.replace(/^\//, '');
-            original = 'https://www.youtube.com/watch?v=' + id;
-          } else if (u.hostname.includes('youtube.com') && !u.searchParams.get('v')) {
-            // if it's already an embed URL, try to reconstruct watch URL
-            const parts = u.pathname.split('/');
-            const idx = parts.indexOf('embed');
-            if (idx >= 0 && parts[idx+1]) original = 'https://www.youtube.com/watch?v=' + parts[idx+1];
-          }
-        } catch (e) {}
+    if (type === 'youtube' && src) {
+      const embed = buildYouTubeEmbed(src);
+      let original = src;
+      try {
+        const u = new URL(src);
+        if (u.hostname.includes('youtu.be')) {
+          const id = u.pathname.replace(/^\//, '');
+          original = 'https://www.youtube.com/watch?v=' + id;
+        } else if (u.hostname.includes('youtube.com') && !u.searchParams.get('v')) {
+          const parts = u.pathname.split('/');
+          const idx = parts.indexOf('embed');
+          if (idx >= 0 && parts[idx+1]) original = 'https://www.youtube.com/watch?v=' + parts[idx+1];
+        }
+      } catch (err) {}
 
-        content.innerHTML = `
-          <div class="lb-video-wrap">
-            <iframe src="${embed}"
-              frameborder="0"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowfullscreen></iframe>
-            <div class="lightbox-actions">
-              <a class="open-original" href="${original}" target="_blank" rel="noopener noreferrer">Άνοιγμα στο YouTube</a>
-            </div>
-          </div>`;
-      }
+      content.innerHTML = `
+        <div class="lb-video-wrap">
+          <iframe src="${embed}"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+          <div class="lightbox-actions">
+            <a class="open-original" href="${original}" target="_blank" rel="noopener noreferrer">Άνοιγμα στο YouTube</a>
+          </div>
+        </div>`;
+    }
 
-      if (type === 'image' && src) {
-        content.innerHTML = `<img src="${src}" alt="">`;
-      }
+    if (type === 'image' && src) {
+      content.innerHTML = `<img src="${src}" alt="">`;
+    }
 
-      if (type === 'pdf' && src) {
-        content.innerHTML = `<iframe src="${src}"></iframe>`;
-      }
+    if (type === 'pdf' && src) {
+      content.innerHTML = `<iframe src="${src}"></iframe>`;
+    }
 
-      lb.classList.add('active');
-    });
+    lb.classList.add('active');
   });
 
   const close = () => {
