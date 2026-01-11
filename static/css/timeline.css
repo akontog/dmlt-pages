@@ -389,8 +389,6 @@
   transition: transform 0.3s ease;
 }
 .compact-item{ left:50%; transform: translateX(var(--init-offset, 0px)); }
-.compact-item.left { /* kept for compatibility */ }
-.compact-item.right { /* kept for compatibility */ }
 .compact-line {
   width: 4px;
   border-radius: 2px;
