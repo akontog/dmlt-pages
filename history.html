@@ -28,6 +28,34 @@
     
 <link rel="stylesheet" href="static/css/timeline.css">
 <link rel="stylesheet" href="static/css/lightbox.css">
+<style>
+:root{--tl-header-total:140px; --tl-footer-height:64px}
+/* disable vertical scroll for the whole page on timeline */
+body { overflow: hidden; }
+/* fix header and menu */
+.site-header, .main-nav { position: fixed; left:0; right:0; z-index: 1400; }
+.site-header { top: 0; }
+.main-nav { top: calc(var(--tl-header-total) - 56px); }
+/* fix footer (below viewport) */
+.site-footer { position: fixed; left:0; right:0; bottom:0; z-index:1200; }
+/* main content: let timeline-viewport handle horizontal scrolling */
+main.container {
+    position: absolute;
+    top: 0; /* we'll offset inside */
+    left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+}
+/* ensure timeline sits inside the horizontal scroller and beneath header/menu */
+.page-content { padding-top: var(--tl-header-total); padding-bottom: var(--tl-footer-height); height: 100%; box-sizing: border-box; }
+.timeline { height: calc(100vh - var(--tl-header-total) - var(--tl-footer-height)); margin: 0; }
+
+/* hide header logo on timeline page to maximize horizontal space */
+.header-logo { display: none !important; }
+/* auto-hide header when scrolling timeline horizontally */
+.site-header, .main-nav { transition: transform 0.28s ease; will-change: transform; }
+.site-header.hidden { transform: translateY(-100%); }
+.main-nav.hidden { transform: translateY(-56px); }
+</style>
 
 </head>
 <body>
@@ -58,8 +86,8 @@
                     <a href="activities.html" >Δραστηριότητες ▼</a>
                     <ul class="dropdown-content">
                         <li><a href="projects.html">Προγράμματα</a></li>
-                        <li><a href="theses.html">Πτυχιακές/Διπλωματικές</a></li>
-                        <li><a href="history.html">Ιστορία Μαθηματικών</a></li>
+                        
+                        
                     </ul>
                 </li>
             
@@ -80,12 +108,13 @@
         
 <div class="page-content">
     <h2>Ιστορία των Μαθηματικών</h2>
-    <div class="timeline" style="height: 7200px;">
+    <div class="timeline-viewport" id="timelineViewport" style="top: var(--tl-header-total); bottom: calc(var(--tl-footer-height) + 28px);">
+        <div class="timeline" id="timelineInner" style="width: 7200px;">
 
-        <div class="timeline-grid" style="height: 7200px;">
+            <div class="timeline-grid" style="width: 7200px;">
             
             <div class="timeline-grid-line major period-stone_age"
-                style="top: 0px;">
+                style="left: 0px;">
                 
                 <span class="timeline-grid-label">
                      20000 π.Χ. </span>
@@ -93,27 +122,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 30.0px;">
+                style="left: 30.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 60.0px;">
+                style="left: 60.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 90.0px;">
+                style="left: 90.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 120.0px;">
+                style="left: 120.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-stone_age"
-                style="top: 150px;">
+                style="left: 150px;">
                 
                 <span class="timeline-grid-label">
                      15000 π.Χ. </span>
@@ -121,27 +150,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 180.0px;">
+                style="left: 180.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 210.0px;">
+                style="left: 210.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 240.0px;">
+                style="left: 240.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 270.0px;">
+                style="left: 270.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-stone_age"
-                style="top: 300px;">
+                style="left: 300px;">
                 
                 <span class="timeline-grid-label">
                      10000 π.Χ. </span>
@@ -149,27 +178,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 330.0px;">
+                style="left: 330.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 360.0px;">
+                style="left: 360.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 390.0px;">
+                style="left: 390.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 420.0px;">
+                style="left: 420.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-stone_age"
-                style="top: 450px;">
+                style="left: 450px;">
                 
                 <span class="timeline-grid-label">
                      5000 π.Χ. </span>
@@ -177,27 +206,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 480.0px;">
+                style="left: 480.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 510.0px;">
+                style="left: 510.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 540.0px;">
+                style="left: 540.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 570.0px;">
+                style="left: 570.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-stone_age"
-                style="top: 600px;">
+                style="left: 600px;">
                 
                 <span class="timeline-grid-label">
                      4000 π.Χ. </span>
@@ -205,27 +234,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 630.0px;">
+                style="left: 630.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 660.0px;">
+                style="left: 660.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 690.0px;">
+                style="left: 690.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-stone_age"
-                style="top: 720.0px;">
+                style="left: 720.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-stone_age"
-                style="top: 750px;">
+                style="left: 750px;">
                 
                 <span class="timeline-grid-label">
                      3000 π.Χ. </span>
@@ -233,27 +262,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 780.0px;">
+                style="left: 780.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 810.0px;">
+                style="left: 810.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 840.0px;">
+                style="left: 840.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 870.0px;">
+                style="left: 870.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-bronze_age"
-                style="top: 900px;">
+                style="left: 900px;">
                 
                 <span class="timeline-grid-label">
                      2000 π.Χ. </span>
@@ -261,27 +290,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 930.0px;">
+                style="left: 930.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 960.0px;">
+                style="left: 960.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 990.0px;">
+                style="left: 990.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-bronze_age"
-                style="top: 1020.0px;">
+                style="left: 1020.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-prehellenic"
-                style="top: 1050px;">
+                style="left: 1050px;">
                 
                 <span class="timeline-grid-label">
                      1000 π.Χ. </span>
@@ -289,27 +318,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1080.0px;">
+                style="left: 1080.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1110.0px;">
+                style="left: 1110.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1140.0px;">
+                style="left: 1140.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1170.0px;">
+                style="left: 1170.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-prehellenic"
-                style="top: 1200px;">
+                style="left: 1200px;">
                 
                 <span class="timeline-grid-label">
                      900 π.Χ. </span>
@@ -317,27 +346,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1230.0px;">
+                style="left: 1230.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1260.0px;">
+                style="left: 1260.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1290.0px;">
+                style="left: 1290.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1320.0px;">
+                style="left: 1320.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-prehellenic"
-                style="top: 1350px;">
+                style="left: 1350px;">
                 
                 <span class="timeline-grid-label">
                      800 π.Χ. </span>
@@ -345,27 +374,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1380.0px;">
+                style="left: 1380.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1410.0px;">
+                style="left: 1410.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1440.0px;">
+                style="left: 1440.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1470.0px;">
+                style="left: 1470.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-prehellenic"
-                style="top: 1500px;">
+                style="left: 1500px;">
                 
                 <span class="timeline-grid-label">
                      700 π.Χ. </span>
@@ -373,27 +402,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1530.0px;">
+                style="left: 1530.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1560.0px;">
+                style="left: 1560.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1590.0px;">
+                style="left: 1590.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-prehellenic"
-                style="top: 1620.0px;">
+                style="left: 1620.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-prehellenic"
-                style="top: 1650px;">
+                style="left: 1650px;">
                 
                 <span class="timeline-grid-label">
                      600 π.Χ. </span>
@@ -401,27 +430,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1680.0px;">
+                style="left: 1680.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1710.0px;">
+                style="left: 1710.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1740.0px;">
+                style="left: 1740.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1770.0px;">
+                style="left: 1770.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-ancient_greek"
-                style="top: 1800px;">
+                style="left: 1800px;">
                 
                 <span class="timeline-grid-label">
                      500 π.Χ. </span>
@@ -429,27 +458,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1830.0px;">
+                style="left: 1830.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1860.0px;">
+                style="left: 1860.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1890.0px;">
+                style="left: 1890.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1920.0px;">
+                style="left: 1920.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-ancient_greek"
-                style="top: 1950px;">
+                style="left: 1950px;">
                 
                 <span class="timeline-grid-label">
                      400 π.Χ. </span>
@@ -457,27 +486,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 1980.0px;">
+                style="left: 1980.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 2010.0px;">
+                style="left: 2010.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 2040.0px;">
+                style="left: 2040.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-ancient_greek"
-                style="top: 2070.0px;">
+                style="left: 2070.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-ancient_greek"
-                style="top: 2100px;">
+                style="left: 2100px;">
                 
                 <span class="timeline-grid-label">
                      300 π.Χ. </span>
@@ -485,27 +514,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2130.0px;">
+                style="left: 2130.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2160.0px;">
+                style="left: 2160.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2190.0px;">
+                style="left: 2190.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2220.0px;">
+                style="left: 2220.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 2250px;">
+                style="left: 2250px;">
                 
                 <span class="timeline-grid-label">
                      200 π.Χ. </span>
@@ -513,27 +542,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2280.0px;">
+                style="left: 2280.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2310.0px;">
+                style="left: 2310.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2340.0px;">
+                style="left: 2340.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2370.0px;">
+                style="left: 2370.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 2400px;">
+                style="left: 2400px;">
                 
                 <span class="timeline-grid-label">
                      100 π.Χ. </span>
@@ -541,27 +570,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2430.0px;">
+                style="left: 2430.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2460.0px;">
+                style="left: 2460.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2490.0px;">
+                style="left: 2490.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2520.0px;">
+                style="left: 2520.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 2550px;">
+                style="left: 2550px;">
                 
                 <span class="timeline-grid-label">
                      0  </span>
@@ -569,27 +598,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2580.0px;">
+                style="left: 2580.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2610.0px;">
+                style="left: 2610.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2640.0px;">
+                style="left: 2640.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2670.0px;">
+                style="left: 2670.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 2700px;">
+                style="left: 2700px;">
                 
                 <span class="timeline-grid-label">
                      100  </span>
@@ -597,27 +626,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2730.0px;">
+                style="left: 2730.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2760.0px;">
+                style="left: 2760.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2790.0px;">
+                style="left: 2790.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2820.0px;">
+                style="left: 2820.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 2850px;">
+                style="left: 2850px;">
                 
                 <span class="timeline-grid-label">
                      200  </span>
@@ -625,27 +654,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2880.0px;">
+                style="left: 2880.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2910.0px;">
+                style="left: 2910.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2940.0px;">
+                style="left: 2940.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 2970.0px;">
+                style="left: 2970.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 3000px;">
+                style="left: 3000px;">
                 
                 <span class="timeline-grid-label">
                      300  </span>
@@ -653,27 +682,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3030.0px;">
+                style="left: 3030.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3060.0px;">
+                style="left: 3060.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3090.0px;">
+                style="left: 3090.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3120.0px;">
+                style="left: 3120.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 3150px;">
+                style="left: 3150px;">
                 
                 <span class="timeline-grid-label">
                      400  </span>
@@ -681,27 +710,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3180.0px;">
+                style="left: 3180.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3210.0px;">
+                style="left: 3210.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3240.0px;">
+                style="left: 3240.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-hellenistic_roman"
-                style="top: 3270.0px;">
+                style="left: 3270.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-hellenistic_roman"
-                style="top: 3300px;">
+                style="left: 3300px;">
                 
                 <span class="timeline-grid-label">
                      500  </span>
@@ -709,27 +738,27 @@
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3330.0px;">
+                style="left: 3330.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3360.0px;">
+                style="left: 3360.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3390.0px;">
+                style="left: 3390.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3420.0px;">
+                style="left: 3420.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major"
-                style="top: 3450px;">
+                style="left: 3450px;">
                 
                 <span class="timeline-grid-label">
                      600  </span>
@@ -737,27 +766,27 @@
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3480.0px;">
+                style="left: 3480.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3510.0px;">
+                style="left: 3510.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3540.0px;">
+                style="left: 3540.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3570.0px;">
+                style="left: 3570.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major"
-                style="top: 3600px;">
+                style="left: 3600px;">
                 
                 <span class="timeline-grid-label">
                      700  </span>
@@ -765,27 +794,27 @@
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3630.0px;">
+                style="left: 3630.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3660.0px;">
+                style="left: 3660.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3690.0px;">
+                style="left: 3690.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 3720.0px;">
+                style="left: 3720.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-islamic"
-                style="top: 3750px;">
+                style="left: 3750px;">
                 
                 <span class="timeline-grid-label">
                      800  </span>
@@ -793,27 +822,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 3780.0px;">
+                style="left: 3780.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 3810.0px;">
+                style="left: 3810.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 3840.0px;">
+                style="left: 3840.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 3870.0px;">
+                style="left: 3870.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-islamic"
-                style="top: 3900px;">
+                style="left: 3900px;">
                 
                 <span class="timeline-grid-label">
                      900  </span>
@@ -821,27 +850,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 3930.0px;">
+                style="left: 3930.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 3960.0px;">
+                style="left: 3960.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 3990.0px;">
+                style="left: 3990.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4020.0px;">
+                style="left: 4020.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-islamic"
-                style="top: 4050px;">
+                style="left: 4050px;">
                 
                 <span class="timeline-grid-label">
                      1000  </span>
@@ -849,27 +878,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4080.0px;">
+                style="left: 4080.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4110.0px;">
+                style="left: 4110.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4140.0px;">
+                style="left: 4140.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4170.0px;">
+                style="left: 4170.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-islamic"
-                style="top: 4200px;">
+                style="left: 4200px;">
                 
                 <span class="timeline-grid-label">
                      1100  </span>
@@ -877,27 +906,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4230.0px;">
+                style="left: 4230.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4260.0px;">
+                style="left: 4260.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4290.0px;">
+                style="left: 4290.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4320.0px;">
+                style="left: 4320.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-islamic"
-                style="top: 4350px;">
+                style="left: 4350px;">
                 
                 <span class="timeline-grid-label">
                      1200  </span>
@@ -905,27 +934,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4380.0px;">
+                style="left: 4380.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4410.0px;">
+                style="left: 4410.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4440.0px;">
+                style="left: 4440.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4470.0px;">
+                style="left: 4470.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-islamic"
-                style="top: 4500px;">
+                style="left: 4500px;">
                 
                 <span class="timeline-grid-label">
                      1300  </span>
@@ -933,27 +962,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4530.0px;">
+                style="left: 4530.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4560.0px;">
+                style="left: 4560.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4590.0px;">
+                style="left: 4590.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-islamic"
-                style="top: 4620.0px;">
+                style="left: 4620.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-islamic"
-                style="top: 4650px;">
+                style="left: 4650px;">
                 
                 <span class="timeline-grid-label">
                      1400  </span>
@@ -961,27 +990,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4680.0px;">
+                style="left: 4680.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4710.0px;">
+                style="left: 4710.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4740.0px;">
+                style="left: 4740.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4770.0px;">
+                style="left: 4770.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-renaissance"
-                style="top: 4800px;">
+                style="left: 4800px;">
                 
                 <span class="timeline-grid-label">
                      1500  </span>
@@ -989,27 +1018,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4830.0px;">
+                style="left: 4830.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4860.0px;">
+                style="left: 4860.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4890.0px;">
+                style="left: 4890.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4920.0px;">
+                style="left: 4920.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-renaissance"
-                style="top: 4950px;">
+                style="left: 4950px;">
                 
                 <span class="timeline-grid-label">
                      1550  </span>
@@ -1017,27 +1046,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 4980.0px;">
+                style="left: 4980.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 5010.0px;">
+                style="left: 5010.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 5040.0px;">
+                style="left: 5040.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 5070.0px;">
+                style="left: 5070.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-renaissance"
-                style="top: 5100px;">
+                style="left: 5100px;">
                 
                 <span class="timeline-grid-label">
                      1600  </span>
@@ -1045,27 +1074,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 5130.0px;">
+                style="left: 5130.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 5160.0px;">
+                style="left: 5160.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 5190.0px;">
+                style="left: 5190.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-renaissance"
-                style="top: 5220.0px;">
+                style="left: 5220.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-renaissance"
-                style="top: 5250px;">
+                style="left: 5250px;">
                 
                 <span class="timeline-grid-label">
                      1650  </span>
@@ -1073,27 +1102,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5280.0px;">
+                style="left: 5280.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5310.0px;">
+                style="left: 5310.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5340.0px;">
+                style="left: 5340.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5370.0px;">
+                style="left: 5370.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-analysis_birth"
-                style="top: 5400px;">
+                style="left: 5400px;">
                 
                 <span class="timeline-grid-label">
                      1700  </span>
@@ -1101,27 +1130,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5430.0px;">
+                style="left: 5430.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5460.0px;">
+                style="left: 5460.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5490.0px;">
+                style="left: 5490.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5520.0px;">
+                style="left: 5520.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-analysis_birth"
-                style="top: 5550px;">
+                style="left: 5550px;">
                 
                 <span class="timeline-grid-label">
                      1750  </span>
@@ -1129,27 +1158,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5580.0px;">
+                style="left: 5580.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5610.0px;">
+                style="left: 5610.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5640.0px;">
+                style="left: 5640.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-analysis_birth"
-                style="top: 5670.0px;">
+                style="left: 5670.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-analysis_birth"
-                style="top: 5700px;">
+                style="left: 5700px;">
                 
                 <span class="timeline-grid-label">
                      1800  </span>
@@ -1157,27 +1186,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5730.0px;">
+                style="left: 5730.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5760.0px;">
+                style="left: 5760.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5790.0px;">
+                style="left: 5790.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5820.0px;">
+                style="left: 5820.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-modern_algebra"
-                style="top: 5850px;">
+                style="left: 5850px;">
                 
                 <span class="timeline-grid-label">
                      1825  </span>
@@ -1185,27 +1214,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5880.0px;">
+                style="left: 5880.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5910.0px;">
+                style="left: 5910.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5940.0px;">
+                style="left: 5940.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 5970.0px;">
+                style="left: 5970.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-modern_algebra"
-                style="top: 6000px;">
+                style="left: 6000px;">
                 
                 <span class="timeline-grid-label">
                      1850  </span>
@@ -1213,27 +1242,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6030.0px;">
+                style="left: 6030.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6060.0px;">
+                style="left: 6060.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6090.0px;">
+                style="left: 6090.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6120.0px;">
+                style="left: 6120.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-modern_algebra"
-                style="top: 6150px;">
+                style="left: 6150px;">
                 
                 <span class="timeline-grid-label">
                      1875  </span>
@@ -1241,27 +1270,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6180.0px;">
+                style="left: 6180.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6210.0px;">
+                style="left: 6210.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6240.0px;">
+                style="left: 6240.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-modern_algebra"
-                style="top: 6270.0px;">
+                style="left: 6270.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-modern_algebra"
-                style="top: 6300px;">
+                style="left: 6300px;">
                 
                 <span class="timeline-grid-label">
                      1900  </span>
@@ -1269,27 +1298,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-foundations"
-                style="top: 6330.0px;">
+                style="left: 6330.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-foundations"
-                style="top: 6360.0px;">
+                style="left: 6360.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-foundations"
-                style="top: 6390.0px;">
+                style="left: 6390.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-foundations"
-                style="top: 6420.0px;">
+                style="left: 6420.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-foundations"
-                style="top: 6450px;">
+                style="left: 6450px;">
                 
                 <span class="timeline-grid-label">
                      1925  </span>
@@ -1297,27 +1326,27 @@
             </div>
             
             <div class="timeline-grid-line minor period-foundations"
-                style="top: 6480.0px;">
+                style="left: 6480.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-logic_cs"
-                style="top: 6510.0px;">
+                style="left: 6510.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-logic_cs"
-                style="top: 6540.0px;">
+                style="left: 6540.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor period-logic_cs"
-                style="top: 6570.0px;">
+                style="left: 6570.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major period-logic_cs"
-                style="top: 6600px;">
+                style="left: 6600px;">
                 
                 <span class="timeline-grid-label">
                      1950  </span>
@@ -1325,27 +1354,27 @@
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6630.0px;">
+                style="left: 6630.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6660.0px;">
+                style="left: 6660.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6690.0px;">
+                style="left: 6690.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6720.0px;">
+                style="left: 6720.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major"
-                style="top: 6750px;">
+                style="left: 6750px;">
                 
                 <span class="timeline-grid-label">
                      1975  </span>
@@ -1353,27 +1382,27 @@
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6780.0px;">
+                style="left: 6780.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6810.0px;">
+                style="left: 6810.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6840.0px;">
+                style="left: 6840.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6870.0px;">
+                style="left: 6870.0px;">
                 
             </div>
             
             <div class="timeline-grid-line major"
-                style="top: 6900px;">
+                style="left: 6900px;">
                 
                 <span class="timeline-grid-label">
                      2000  </span>
@@ -1381,706 +1410,1210 @@
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6930.0px;">
+                style="left: 6930.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6960.0px;">
+                style="left: 6960.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 6990.0px;">
+                style="left: 6990.0px;">
                 
             </div>
             
             <div class="timeline-grid-line minor"
-                style="top: 7020.0px;">
+                style="left: 7020.0px;">
                 
             </div>
             
         </div>
 
         <!-- Period Headings -->
-        
-        <div class="period-heading period-stone_age" style="top: 0.0px;">
-            Λίθινη Εποχή
-        </div>
-        
-        <div class="period-heading period-bronze_age" style="top: 750.0px;">
-            Εποχή του Χαλκού
-        </div>
-        
-        <div class="period-heading period-prehellenic" style="top: 1020.0px;">
-            Προελληνικά Μαθηματικά
-        </div>
-        
-        <div class="period-heading period-ancient_greek" style="top: 1650.0px;">
-            Αρχαία Ελληνικά Μαθηματικά
-        </div>
-        
-        <div class="period-heading period-hellenistic_roman" style="top: 2100.0px;">
-            Ελληνιστική & Ρωμαϊκή περίοδος
-        </div>
-        
-        <div class="period-heading period-islamic" style="top: 3750.0px;">
-            Ισλαμικός Χρυσός Αιώνας
-        </div>
-        
-        <div class="period-heading period-renaissance" style="top: 4650.0px;">
-            Αναγέννηση & Πρώιμη Νεωτερικότητα
-        </div>
-        
-        <div class="period-heading period-analysis_birth" style="top: 5250.0px;">
-            Γέννηση της Ανάλυσης
-        </div>
-        
-        <div class="period-heading period-modern_algebra" style="top: 5700.0px;">
-            Αυστηροποίηση & Σύγχρονη Άλγεβρα
-        </div>
-        
-        <div class="period-heading period-foundations" style="top: 6300.0px;">
-            Θεμέλια των Μαθηματικών
-        </div>
-        
-        <div class="period-heading period-logic_cs" style="top: 6480.0px;">
-            Λογική, Υπολογισιμότητα & Πληροφορική
-        </div>
-        
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="0" data-init-offset="0" data-top="1974.0"
-            style="top: 1974.0px; left:50%; --init-offset: 0px;">
-
+            
+            <div class="period-heading period-stone_age" style="left: 0.0px;">
+                Λίθινη Εποχή
+            </div>
+            
+            <div class="period-heading period-bronze_age" style="left: 750.0px;">
+                Εποχή του Χαλκού
+            </div>
+            
+            <div class="period-heading period-prehellenic" style="left: 1020.0px;">
+                Προελληνικά Μαθηματικά
+            </div>
+            
+            <div class="period-heading period-ancient_greek" style="left: 1650.0px;">
+                Αρχαία Ελληνικά Μαθηματικά
+            </div>
+            
+            <div class="period-heading period-hellenistic_roman" style="left: 2100.0px;">
+                Ελληνιστική & Ρωμαϊκή περίοδος
+            </div>
+            
+            <div class="period-heading period-islamic" style="left: 3750.0px;">
+                Ισλαμικός Χρυσός Αιώνας
+            </div>
+            
+            <div class="period-heading period-renaissance" style="left: 4650.0px;">
+                Αναγέννηση & Πρώιμη Νεωτερικότητα
+            </div>
+            
+            <div class="period-heading period-analysis_birth" style="left: 5250.0px;">
+                Γέννηση της Ανάλυσης
+            </div>
+            
+            <div class="period-heading period-modern_algebra" style="left: 5700.0px;">
+                Αυστηροποίηση & Σύγχρονη Άλγεβρα
+            </div>
+            
+            <div class="period-heading period-foundations" style="left: 6300.0px;">
+                Θεμέλια των Μαθηματικών
+            </div>
+            
+            <div class="period-heading period-logic_cs" style="left: 6480.0px;">
+                Λογική, Υπολογισιμότητα & Πληροφορική
+            </div>
             
 
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+            <!-- years bar at bottom of timeline -->
+            <div class="timeline-years" aria-hidden="true">
                 
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/aristotle.jpeg"
-                    alt="Αριστοτέλης">
+                    
+                        <span class="timeline-year" style="left: 0px;">20000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 150px;">15000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 300px;">10000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 450px;">5000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 600px;">4000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 750px;">3000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 900px;">2000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 1050px;">1000 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 1200px;">900 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 1350px;">800 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 1500px;">700 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 1650px;">600 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 1800px;">500 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 1950px;">400 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 2100px;">300 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 2250px;">200 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 2400px;">100 π.Χ.</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 2550px;">0</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 2700px;">100</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 2850px;">200</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 3000px;">300</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 3150px;">400</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 3300px;">500</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 3450px;">600</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 3600px;">700</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 3750px;">800</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 3900px;">900</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 4050px;">1000</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 4200px;">1100</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 4350px;">1200</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 4500px;">1300</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 4650px;">1400</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 4800px;">1500</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 4950px;">1550</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 5100px;">1600</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 5250px;">1650</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 5400px;">1700</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 5550px;">1750</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 5700px;">1800</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 5850px;">1825</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 6000px;">1850</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 6150px;">1875</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 6300px;">1900</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 6450px;">1925</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 6600px;">1950</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 6750px;">1975</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <span class="timeline-year" style="left: 6900px;">2000</span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </div>
+
+            <!-- render items inside timeline so they scroll together -->
+            
+
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="0" data-init-offset="0" data-x="1974.0"
+                style="left: 1974.0px; --init-offset: 0px;">
+
                 
 
-                <div class="life-wrap"
-                    style="height: 93.0px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 93.0px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Αριστοτέλης
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/aristotle.jpeg"
+                        alt="Αριστοτέλης">
+                    
+
+                    <div class="life-wrap" style="height: 93.0px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 93.0px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Αριστοτέλης</div>
+                            
+                            <div class="lifespan">c.384 π.Χ. – 322 π.Χ.</div>
+                            
                         </div>
-                        
-                        <div class="lifespan">c.384 π.Χ. – 322 π.Χ.</div>
-                        
                     </div>
                 </div>
+
+                
+
+                <div class="compact-hidden" id="compact-full-0" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/aristotle.jpeg" alt="Αριστοτέλης" class="popup-image" data-src="static/images/timeline/aristotle.jpeg">
+                            
+                        </div>
+                        <div class="popup-right">
+                            <h3>Αριστοτέλης</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">c.384 π.Χ. – 322 π.Χ.</p>
+                            <div class="popup-description">Αρχαίος Έλληνας φιλόσοφος και επιστήμονας.</div>
+                            <div class="popup-icons">
+                                
+                                <button class="tl-icon lb-trigger" data-type="youtube" data-src="https://www.youtube.com/watch?v=l8jv5INBcns">YouTube</button>
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             
 
-            <div class="compact-hidden" id="compact-full-0" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/aristotle.jpeg" alt="Αριστοτέλης"
-                            class="popup-image" data-src="static/images/timeline/aristotle.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Αριστοτέλης</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">c.384 π.Χ. – 322 π.Χ.</p>
-                        <div class="popup-description">Αρχαίος Έλληνας φιλόσοφος και επιστήμονας.</div>
-                        <div class="popup-icons">
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="1" data-init-offset="0" data-x="2055.0"
+                style="left: 2055.0px; --init-offset: 0px;">
+
+                
+
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/euklid.jpeg"
+                        alt="Ευκλείδης">
+                    
+
+                    <div class="life-wrap" style="height: 105.0px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 105.0px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Ευκλείδης</div>
                             
-                            <button class="tl-icon lb-trigger" data-type="youtube"
-                                data-src="https://www.youtube.com/watch?v=l8jv5INBcns">YouTube</button>
-                            
-                            
+                            <div class="lifespan">c.330 π.Χ. – 260 π.Χ.</div>
                             
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="1" data-init-offset="0" data-top="2055.0"
-            style="top: 2055.0px; left:50%; --init-offset: 0px;">
-
-            
-
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
-                
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/euklid.jpeg"
-                    alt="Ευκλείδης">
                 
 
-                <div class="life-wrap"
-                    style="height: 105.0px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 105.0px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Ευκλείδης
+                <div class="compact-hidden" id="compact-full-1" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/euklid.jpeg" alt="Ευκλείδης" class="popup-image" data-src="static/images/timeline/euklid.jpeg">
+                            
                         </div>
-                        
-                        <div class="lifespan">c.330 π.Χ. – 260 π.Χ.</div>
-                        
+                        <div class="popup-right">
+                            <h3>Ευκλείδης</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">c.330 π.Χ. – 260 π.Χ.</p>
+                            <div class="popup-description">Συγγραφέας των «Στοιχείων», του πιο επιδραστικού μαθηματικού βιβλίου όλων των εποχών. Θεμελίωσε την αξιωματική μέθοδο στη Γεωμετρία.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                                <a class="tl-icon" href="https://personal.math.ubc.ca/~cass/Euclid/papyrus/papyrus.html " target="_blank" rel="noopener noreferrer">External</a>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
             
 
-            <div class="compact-hidden" id="compact-full-1" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/euklid.jpeg" alt="Ευκλείδης"
-                            class="popup-image" data-src="static/images/timeline/euklid.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Ευκλείδης</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">c.330 π.Χ. – 260 π.Χ.</p>
-                        <div class="popup-description">Συγγραφέας των «Στοιχείων», του πιο επιδραστικού μαθηματικού βιβλίου όλων των εποχών. Θεμελίωσε την αξιωματική μέθοδο στη Γεωμετρία.</div>
-                        <div class="popup-icons">
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="2" data-init-offset="0" data-x="2119.5"
+                style="left: 2119.5px; --init-offset: 0px;">
+
+                
+
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/archimedes.jpeg"
+                        alt="Αρχιμήδης">
+                    
+
+                    <div class="life-wrap" style="height: 112.5px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 112.5px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Αρχιμήδης</div>
                             
-                            
-                            
-                            <a class="tl-icon" href="https://personal.math.ubc.ca/~cass/Euclid/papyrus/papyrus.html " target="_blank"
-                                rel="noopener noreferrer">External</a>
+                            <div class="lifespan">c.287 π.Χ. – 212 π.Χ.</div>
                             
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="2" data-init-offset="0" data-top="2119.5"
-            style="top: 2119.5px; left:50%; --init-offset: 0px;">
-
-            
-
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
-                
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/archimedes.jpeg"
-                    alt="Αρχιμήδης">
                 
 
-                <div class="life-wrap"
-                    style="height: 112.5px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 112.5px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Αρχιμήδης
+                <div class="compact-hidden" id="compact-full-2" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/archimedes.jpeg" alt="Αρχιμήδης" class="popup-image" data-src="static/images/timeline/archimedes.jpeg">
+                            
                         </div>
-                        
-                        <div class="lifespan">c.287 π.Χ. – 212 π.Χ.</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <div class="compact-hidden" id="compact-full-2" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/archimedes.jpeg" alt="Αρχιμήδης"
-                            class="popup-image" data-src="static/images/timeline/archimedes.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Αρχιμήδης</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">c.287 π.Χ. – 212 π.Χ.</p>
-                        <div class="popup-description">Ένας από τους μεγαλύτερους μαθηματικούς και φυσικούς της αρχαιότητας. Συνέδεσε τη γεωμετρία με τη φυσική και εισήγαγε πρώιμες έννοιες ολοκληρωτικού λογισμού.</div>
-                        <div class="popup-icons">
-                            
-                            <button class="tl-icon lb-trigger" data-type="youtube"
-                                data-src="https://www.youtube.com/watch?v=XfeuCfOUuXg">YouTube</button>
-                            
-                            
-                            
+                        <div class="popup-right">
+                            <h3>Αρχιμήδης</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">c.287 π.Χ. – 212 π.Χ.</p>
+                            <div class="popup-description">Ένας από τους μεγαλύτερους μαθηματικούς και φυσικούς της αρχαιότητας. Συνέδεσε τη γεωμετρία με τη φυσική και εισήγαγε πρώιμες έννοιες ολοκληρωτικού λογισμού.</div>
+                            <div class="popup-icons">
+                                
+                                <button class="tl-icon lb-trigger" data-type="youtube" data-src="https://www.youtube.com/watch?v=XfeuCfOUuXg">YouTube</button>
+                                
+                                
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-             
-            milestone"
-            data-item-id="3" data-init-offset="120" data-top="2178.0"
-            style="top: 2178.0px; left:50%; --init-offset: 120px;">
-
             
-            <div class="compact-box" style="background: var(--period-color);">
-                <div class="compact-box-name">Κόσκινο του Ερατοσθένη<div class="compact-box-year">c.240 π.Χ.</div>
+
+            <div class="compact-item compact-trigger 
+                 
+                 
+                milestone"
+                data-item-id="3" data-init-offset="120" data-x="2178.0"
+                style="left: 2178.0px; --init-offset: 120px;">
+
+                
+                <div class="compact-box" style="background: var(--period-color);">
+                    <div class="compact-box-name">Κόσκινο του Ερατοσθένη<div class="compact-box-year">c.240 π.Χ.</div>
+                    </div>
+                    
                 </div>
                 
-                
-            </div>
-            
 
-            <div class="compact-hidden" id="compact-full-3" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Κόσκινο του Ερατοσθένη</h3>
-                        <p><strong></strong></p>
-                        
-                        <div class="popup-description">Αλγόριθμος για την εύρεση όλων των πρώτων αριθμών μέχρι κάποιον ακέραιο.</div>
-                        <div class="popup-icons">
+                <div class="compact-hidden" id="compact-full-3" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
                             
+                        </div>
+                        <div class="popup-right">
+                            <h3>Κόσκινο του Ερατοσθένη</h3>
+                            <p><strong></strong></p>
                             
-                            
+                            <div class="popup-description">Αλγόριθμος για την εύρεση όλων των πρώτων αριθμών μέχρι κάποιον ακέραιο.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-             
-            milestone"
-            data-item-id="4" data-init-offset="0" data-top="4341.0"
-            style="top: 4341.0px; left:50%; --init-offset: 0px;">
-
             
-            <div class="compact-box" style="background: var(--period-color);">
-                <div class="compact-box-name">Liber Abaci<div class="compact-box-year">1202</div>
+
+            <div class="compact-item compact-trigger 
+                 
+                 
+                milestone"
+                data-item-id="4" data-init-offset="0" data-x="4341.0"
+                style="left: 4341.0px; --init-offset: 0px;">
+
+                
+                <div class="compact-box" style="background: var(--period-color);">
+                    <div class="compact-box-name">Liber Abaci<div class="compact-box-year">1202</div>
+                    </div>
+                    
+                    <img class="compact-box-img" src="static/images/timeline/liber_abbaci.jpeg" alt="Liber Abaci">
+                    
                 </div>
                 
-                <img class="compact-box-img" src="static/images/timeline/liber_abbaci.jpeg" alt="Liber Abaci">
-                
-                
+
+                <div class="compact-hidden" id="compact-full-4" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/liber_abbaci.jpeg" alt="Liber Abaci" class="popup-image" data-src="static/images/timeline/liber_abbaci.jpeg">
+                            
+                        </div>
+                        <div class="popup-right">
+                            <h3>Liber Abaci</h3>
+                            <p><strong></strong></p>
+                            
+                            <div class="popup-description">Βιβλίο του Λεονάρντο της Πίζας (Φιμπονάτσι) που εισήγαγε τα αραβικά ψηφία και το δεκαδικό σύστημα στην Ευρώπη.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
             
 
-            <div class="compact-hidden" id="compact-full-4" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/liber_abbaci.jpeg" alt="Liber Abaci"
-                            class="popup-image" data-src="static/images/timeline/liber_abbaci.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Liber Abaci</h3>
-                        <p><strong></strong></p>
-                        
-                        <div class="popup-description">Βιβλίο του Λεονάρντο της Πίζας (Φιμπονάτσι) που εισήγαγε τα αραβικά ψηφία και το δεκαδικό σύστημα στην Ευρώπη.</div>
-                        <div class="popup-icons">
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="5" data-init-offset="0" data-x="5229.0"
+                style="left: 5229.0px; --init-offset: 0px;">
+
+                
+
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/newton.jpeg"
+                        alt="Ισαάκ Νεύτων">
+                    
+
+                    <div class="life-wrap" style="height: 252.0px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 252.0px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Ισαάκ Νεύτων</div>
                             
-                            
+                            <div class="lifespan">1643 – 1727</div>
                             
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="5" data-init-offset="0" data-top="5229.0"
-            style="top: 5229.0px; left:50%; --init-offset: 0px;">
-
-            
-
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
-                
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/newton.jpeg"
-                    alt="Ισαάκ Νεύτων">
                 
 
-                <div class="life-wrap"
-                    style="height: 252.0px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 252.0px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Ισαάκ Νεύτων
+                <div class="compact-hidden" id="compact-full-5" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/newton.jpeg" alt="Ισαάκ Νεύτων" class="popup-image" data-src="static/images/timeline/newton.jpeg">
+                            
                         </div>
-                        
-                        <div class="lifespan">1643 – 1727</div>
-                        
+                        <div class="popup-right">
+                            <h3>Ισαάκ Νεύτων</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">1643 – 1727</p>
+                            <div class="popup-description">Συνδημιουργός του απειροστικού λογισμού και θεμελιωτής της κλασικής μηχανικής.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
             
 
-            <div class="compact-hidden" id="compact-full-5" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/newton.jpeg" alt="Ισαάκ Νεύτων"
-                            class="popup-image" data-src="static/images/timeline/newton.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Ισαάκ Νεύτων</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">1643 – 1727</p>
-                        <div class="popup-description">Συνδημιουργός του απειροστικού λογισμού και θεμελιωτής της κλασικής μηχανικής.</div>
-                        <div class="popup-icons">
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="6" data-init-offset="120" data-x="5238.0"
+                style="left: 5238.0px; --init-offset: 120px;">
+
+                
+
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/leibniz.jpeg"
+                        alt="Γκότφριντ Λάιμπνιτς">
+                    
+
+                    <div class="life-wrap" style="height: 210.0px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 210.0px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Γκότφριντ Λάιμπνιτς</div>
                             
-                            
+                            <div class="lifespan">1646 – 1716</div>
                             
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="6" data-init-offset="120" data-top="5238.0"
-            style="top: 5238.0px; left:50%; --init-offset: 120px;">
-
-            
-
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
-                
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/leibniz.jpeg"
-                    alt="Γκότφριντ Λάιμπνιτς">
                 
 
-                <div class="life-wrap"
-                    style="height: 210.0px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 210.0px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Γκότφριντ Λάιμπνιτς
+                <div class="compact-hidden" id="compact-full-6" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/leibniz.jpeg" alt="Γκότφριντ Λάιμπνιτς" class="popup-image" data-src="static/images/timeline/leibniz.jpeg">
+                            
                         </div>
-                        
-                        <div class="lifespan">1646 – 1716</div>
-                        
+                        <div class="popup-right">
+                            <h3>Γκότφριντ Λάιμπνιτς</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">1646 – 1716</p>
+                            <div class="popup-description">Συνδημιουργός του διαφορικού και ολοκληρωτικού λογισμού. Εισήγαγε τον σύγχρονο συμβολισμό.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
             
 
-            <div class="compact-hidden" id="compact-full-6" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/leibniz.jpeg" alt="Γκότφριντ Λάιμπνιτς"
-                            class="popup-image" data-src="static/images/timeline/leibniz.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Γκότφριντ Λάιμπνιτς</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">1646 – 1716</p>
-                        <div class="popup-description">Συνδημιουργός του διαφορικού και ολοκληρωτικού λογισμού. Εισήγαγε τον σύγχρονο συμβολισμό.</div>
-                        <div class="popup-icons">
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="7" data-init-offset="0" data-x="5421.0"
+                style="left: 5421.0px; --init-offset: 0px;">
+
+                
+
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/euler.jpeg"
+                        alt="Λέοναρντ Όιλερ">
+                    
+
+                    <div class="life-wrap" style="height: 228.0px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 228.0px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Λέοναρντ Όιλερ</div>
                             
-                            
+                            <div class="lifespan">1707 – 1783</div>
                             
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="7" data-init-offset="0" data-top="5421.0"
-            style="top: 5421.0px; left:50%; --init-offset: 0px;">
-
-            
-
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
-                
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/euler.jpeg"
-                    alt="Λέοναρντ Όιλερ">
                 
 
-                <div class="life-wrap"
-                    style="height: 228.0px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 228.0px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Λέοναρντ Όιλερ
+                <div class="compact-hidden" id="compact-full-7" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/euler.jpeg" alt="Λέοναρντ Όιλερ" class="popup-image" data-src="static/images/timeline/euler.jpeg">
+                            
                         </div>
-                        
-                        <div class="lifespan">1707 – 1783</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <div class="compact-hidden" id="compact-full-7" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/euler.jpeg" alt="Λέοναρντ Όιλερ"
-                            class="popup-image" data-src="static/images/timeline/euler.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Λέοναρντ Όιλερ</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">1707 – 1783</p>
-                        <div class="popup-description">Κεντρική μορφή των μαθηματικών. Εισήγαγε τη γραφή \( e^x \), τη σχέση \( e^{i\pi}+1=0 \).
+                        <div class="popup-right">
+                            <h3>Λέοναρντ Όιλερ</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">1707 – 1783</p>
+                            <div class="popup-description">Κεντρική μορφή των μαθηματικών. Εισήγαγε τη γραφή \( e^x \), τη σχέση \( e^{i\pi}+1=0 \).
 και συνέβαλε σε ανάλυση, θεωρία γραφημάτων και μηχανική.</div>
-                        <div class="popup-icons">
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+            <div class="compact-item compact-trigger 
+                 
+                 
+                milestone"
+                data-item-id="8" data-init-offset="0" data-x="5496.0"
+                style="left: 5496.0px; --init-offset: 0px;">
+
+                
+                <div class="compact-box" style="background: var(--period-color);">
+                    <div class="compact-box-name">Οι γέφυρες του Königsberg<div class="compact-box-year">1736</div>
+                    </div>
+                    
+                    <img class="compact-box-img" src="static/images/timeline/konigsberg.png" alt="Οι γέφυρες του Königsberg">
+                    
+                </div>
+                
+
+                <div class="compact-hidden" id="compact-full-8" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
                             
+                            <img src="static/images/timeline/konigsberg.png" alt="Οι γέφυρες του Königsberg" class="popup-image" data-src="static/images/timeline/konigsberg.png">
                             
+                        </div>
+                        <div class="popup-right">
+                            <h3>Οι γέφυρες του Königsberg</h3>
+                            <p><strong></strong></p>
+                            
+                            <div class="popup-description">Το διάσημο ιστορικό πρόβλημα «των Επτά Γεφυρών της Κένιγκσμπεργκ» αφορά την ύπαρξη ή μη μιας διαδρομής που να διασχίζει κάθε μία από τις επτά γέφυρες της πόλης ακριβώς μία φορά, επιστρέφοντας ή όχι στο σημείο εκκίνησης, και αποτέλεσε τον κινητήριο μοχλό για τη γέννηση της Θεωρίας Γραφημάτων από τον Λέοναρντ Όιλερ το 1736.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="9" data-init-offset="0" data-x="5790.0"
+                style="left: 5790.0px; --init-offset: 0px;">
+
+                
+
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/galois.jpeg"
+                        alt="Εβαρίστ Γκαλουά">
+                    
+
+                    <div class="life-wrap" style="height: 222.0px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 222.0px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Εβαρίστ Γκαλουά</div>
+                            
+                            <div class="lifespan">1815 – 1852</div>
                             
                         </div>
                     </div>
                 </div>
+
+                
+
+                <div class="compact-hidden" id="compact-full-9" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/galois.jpeg" alt="Εβαρίστ Γκαλουά" class="popup-image" data-src="static/images/timeline/galois.jpeg">
+                            
+                        </div>
+                        <div class="popup-right">
+                            <h3>Εβαρίστ Γκαλουά</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">1815 – 1852</p>
+                            <div class="popup-description">Θεμελιωτής της Θεωρίας Ομάδων και της σύγχρονης Άλγεβρας.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+            
+
+            <div class="compact-item compact-trigger 
+                 
+                person 
+                "
+                data-item-id="10" data-init-offset="0" data-x="6372.0"
+                style="left: 6372.0px; --init-offset: 0px;">
+
+                
+
+                <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
+                    
+                    <img class="life-birth-img compact-thumb" src="static/images/timeline/turing.jpeg"
+                        alt="Άλαν Τούρινγκ">
+                    
+
+                    <div class="life-wrap" style="height: 252.0px; display:flex; align-items:flex-start;">
+                        <div class="life-line" style="background: var(--period-color); height: 252.0px;"></div>
+                        <div class="life-meta" style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
+                            <div class="life-name" style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Άλαν Τούρινγκ</div>
+                            
+                            <div class="lifespan">1912 – 1954</div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="compact-hidden" id="compact-full-10" style="display:none;">
+                    <div class="popup-row">
+                        <div class="popup-left">
+                            
+                            <img src="static/images/timeline/turing.jpeg" alt="Άλαν Τούρινγκ" class="popup-image" data-src="static/images/timeline/turing.jpeg">
+                            
+                        </div>
+                        <div class="popup-right">
+                            <h3>Άλαν Τούρινγκ</h3>
+                            <p><strong></strong></p>
+                            <p class="lifespan">1912 – 1954</p>
+                            <div class="popup-description">Θεμελιωτής της θεωρίας υπολογισιμότητας και της έννοιας του αλγορίθμου.</div>
+                            <div class="popup-icons">
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
 
         </div>
 
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-             
-            milestone"
-            data-item-id="8" data-init-offset="0" data-top="5496.0"
-            style="top: 5496.0px; left:50%; --init-offset: 0px;">
-
-            
-            <div class="compact-box" style="background: var(--period-color);">
-                <div class="compact-box-name">Οι γέφυρες του Königsberg<div class="compact-box-year">1736</div>
-                </div>
-                
-                <img class="compact-box-img" src="static/images/timeline/konigsberg.png" alt="Οι γέφυρες του Königsberg">
-                
-                
-            </div>
-            
-
-            <div class="compact-hidden" id="compact-full-8" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/konigsberg.png" alt="Οι γέφυρες του Königsberg"
-                            class="popup-image" data-src="static/images/timeline/konigsberg.png">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Οι γέφυρες του Königsberg</h3>
-                        <p><strong></strong></p>
-                        
-                        <div class="popup-description">Το διάσημο ιστορικό πρόβλημα «των Επτά Γεφυρών της Κένιγκσμπεργκ» αφορά την ύπαρξη ή μη μιας διαδρομής που να διασχίζει κάθε μία από τις επτά γέφυρες της πόλης ακριβώς μία φορά, επιστρέφοντας ή όχι στο σημείο εκκίνησης, και αποτέλεσε τον κινητήριο μοχλό για τη γέννηση της Θεωρίας Γραφημάτων από τον Λέοναρντ Όιλερ το 1736.</div>
-                        <div class="popup-icons">
-                            
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="9" data-init-offset="0" data-top="5790.0"
-            style="top: 5790.0px; left:50%; --init-offset: 0px;">
-
-            
-
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
-                
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/galois.jpeg"
-                    alt="Εβαρίστ Γκαλουά">
-                
-
-                <div class="life-wrap"
-                    style="height: 222.0px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 222.0px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Εβαρίστ Γκαλουά
-                        </div>
-                        
-                        <div class="lifespan">1815 – 1852</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <div class="compact-hidden" id="compact-full-9" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/galois.jpeg" alt="Εβαρίστ Γκαλουά"
-                            class="popup-image" data-src="static/images/timeline/galois.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Εβαρίστ Γκαλουά</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">1815 – 1852</p>
-                        <div class="popup-description">Θεμελιωτής της Θεωρίας Ομάδων και της σύγχρονης Άλγεβρας.</div>
-                        <div class="popup-icons">
-                            
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        
-
-        
-        <div class="compact-item compact-trigger 
-             
-            person 
-            "
-            data-item-id="10" data-init-offset="0" data-top="6372.0"
-            style="top: 6372.0px; left:50%; --init-offset: 0px;">
-
-            
-
-            
-            <div class="life-person" style="width:200px; display:flex; align-items:flex-start; gap:0.6rem;">
-                
-                <img class="life-birth-img compact-thumb" src="static/images/timeline/turing.jpeg"
-                    alt="Άλαν Τούρινγκ">
-                
-
-                <div class="life-wrap"
-                    style="height: 252.0px; display:flex; align-items:flex-start;">
-                    <div class="life-line"
-                        style="background: var(--period-color); height: 252.0px;"></div>
-                    <div class="life-meta"
-                        style="margin-left:0.6rem; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="life-name"
-                            style="writing-mode:horizontal-tb; text-orientation:mixed; transform:none;">Άλαν Τούρινγκ
-                        </div>
-                        
-                        <div class="lifespan">1912 – 1954</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <div class="compact-hidden" id="compact-full-10" style="display:none;">
-                <div class="popup-row">
-                    <div class="popup-left">
-                        
-                        <img src="static/images/timeline/turing.jpeg" alt="Άλαν Τούρινγκ"
-                            class="popup-image" data-src="static/images/timeline/turing.jpeg">
-                        
-                    </div>
-                    <div class="popup-right">
-                        <h3>Άλαν Τούρινγκ</h3>
-                        <p><strong></strong></p>
-                        <p class="lifespan">1912 – 1954</p>
-                        <div class="popup-description">Θεμελιωτής της θεωρίας υπολογισιμότητας και της έννοιας του αλγορίθμου.</div>
-                        <div class="popup-icons">
-                            
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        
+        <!-- left / right scroll buttons -->
+        <button class="tl-scroll left" id="tlScrollLeft" aria-label="Scroll left">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="tl-scroll right" id="tlScrollRight" aria-label="Scroll right">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        </button>
 
     </div>
-</div>
 
     </main>
     
@@ -2090,7 +2623,6 @@
         <p>
             <a href="https://www.math.aegean.gr/index.php/el/" target="_blank" class="dept-link">
                 Τμήμα Μαθηματικών - Πανεπιστήμιο Αιγαίου
-        Τμήμα Μαθηματικών - Πανεπιστήμιο Αιγαίου
             </a>
         </p>
         <p>Καρλόβασι, Σάμος</p>
@@ -2139,64 +2671,118 @@
             }
         });
 
-        // Nudge compact items horizontally when they share the same vertical position
-        function nudgeCompactItems() {
+        // Arrange compact items onto rails to avoid overlap (horizontal timeline)
+        function arrangeRails() {
             const items = Array.from(document.querySelectorAll('.compact-item'));
+            if (!items.length) return;
 
-            // ταξινόμηση κατα y
-            items.sort((a, b) =>
-                parseFloat(a.dataset.top) - parseFloat(b.dataset.top)
-            );
+            // compute x positions and widths
+            items.forEach(el => {
+                const left = el.style.left || getComputedStyle(el).left || el.dataset.x;
+                const x = parseFloat(left) || 0;
+                el.dataset.xcalc = x;
+                el.dataset.wcalc = el.offsetWidth || 160;
+            });
 
-            const V_THRESHOLD = 28;   // px: τι θεωρούμε "κοντά"
-            const BASE_SPACING = 120;
+            items.sort((a, b) => parseFloat(a.dataset.xcalc) - parseFloat(b.dataset.xcalc));
 
-            let cluster = [];
+            // choose rails based on available vertical space (responsive)
+            const viewportHeight = Math.max(200, document.getElementById('timelineViewport')?.clientHeight || 400);
+            const RAIL_GAP = 40; // spacing between rails
+            const maxRails = Math.max(4, Math.floor((viewportHeight - 40) / RAIL_GAP));
+            const RAILS = Math.min(16, maxRails);
+            const center = (RAILS - 1) / 2;
 
-            function spread(cluster) {
-                if (cluster.length <= 1) return;
+            const occupied = Array.from({length: RAILS}, () => []);
 
-                const maxW = Math.max(...cluster.map(e => e.offsetWidth || 160));
-                const spacing = Math.max(BASE_SPACING, maxW + 16);
+            items.forEach(el => {
+                const x = parseFloat(el.dataset.xcalc);
+                const w = parseFloat(el.dataset.wcalc) || 160;
+                let assigned = -1;
 
-                const seq = [];
-                let i = 0;
-                while (seq.length < cluster.length) {
-                    seq.push(i === 0 ? 0 : (i % 2 ? -Math.ceil(i / 2) : Math.ceil(i / 2)));
-                    i++;
+                for (let r = 0; r < RAILS; r++) {
+                    const occ = occupied[r];
+                    // better collision check using item width
+                    const conflict = occ.some(px => Math.abs(px - x) < (w + 24));
+                    if (!conflict) { occ.push(x); assigned = r; break; }
+                }
+                if (assigned === -1) {
+                    // place into the least occupied rail if none found
+                    let minIdx = 0; let minLen = occupied[0].length;
+                    for (let i = 1; i < occupied.length; i++) if (occupied[i].length < minLen) { minLen = occupied[i].length; minIdx = i; }
+                    occupied[minIdx].push(x); assigned = minIdx;
                 }
 
-                cluster.forEach((el, idx) => {
-                    el.style.transform = `translateX(${seq[idx] * spacing}px)`;
-                });
-            }
-
-            for (let i = 0; i < items.length; i++) {
-                if (!cluster.length) {
-                    cluster.push(items[i]);
-                    continue;
-                }
-
-                const prev = cluster[cluster.length - 1];
-                const dy = Math.abs(
-                    parseFloat(items[i].dataset.top) -
-                    parseFloat(prev.dataset.top)
-                );
-
-                if (dy < V_THRESHOLD) {
-                    cluster.push(items[i]);
-                } else {
-                    spread(cluster);
-                    cluster = [items[i]];
-                }
-            }
-
-            spread(cluster);
+                const offset = (assigned - center) * RAIL_GAP;
+                el.style.transform = `translateY(${offset}px) translateX(-50%)`;
+                el.dataset.rail = assigned;
+            });
         }
 
+        arrangeRails();
+        window.addEventListener('resize', arrangeRails);
 
-        nudgeCompactItems();
-        window.addEventListener('resize', nudgeCompactItems);
+        // Header auto-hide on horizontal scroll; start hidden but keep menu visible
+        (function setupHeaderAutoHide(){
+            const header = document.querySelector('.site-header');
+            const nav = document.querySelector('.main-nav');
+            const page = document.querySelector('.page-content');
+            const vp = document.getElementById('timelineViewport');
+            if (!vp || !header || !page) return;
+            // start hidden (menu remains visible)
+            header.classList.add('hidden');
+            if (nav) nav.classList.remove('hidden');
+            // reduce the top padding so the hidden header space doesn't show as white
+            const menuH = (nav && nav.offsetHeight) ? nav.offsetHeight + 'px' : '56px';
+            page.style.paddingTop = menuH;
+
+            let last = vp.scrollLeft;
+            vp.addEventListener('scroll', () => {
+                const cur = vp.scrollLeft;
+                if (cur - last > 6) {
+                    header.classList.add('hidden');
+                    if (nav) nav.classList.add('hidden');
+                    page.style.paddingTop = menuH;
+                } else if (last - cur > 6) {
+                    header.classList.remove('hidden');
+                    if (nav) nav.classList.remove('hidden');
+                    page.style.paddingTop = 'var(--tl-header-total)';
+                }
+                last = cur;
+            }, { passive: true });
+        })();
+
+        // Scrolling helpers: buttons, wheel-to-horizontal, arrow keys
+        const viewport = document.getElementById('timelineViewport');
+        const btnL = document.getElementById('tlScrollLeft');
+        const btnR = document.getElementById('tlScrollRight');
+        function scrollByDelta(delta) { if (viewport) viewport.scrollLeft += delta; }
+        if (btnL) btnL.addEventListener('click', () => scrollByDelta(-Math.round(viewport.clientWidth * 0.7)));
+        if (btnR) btnR.addEventListener('click', () => scrollByDelta(Math.round(viewport.clientWidth * 0.7)));
+
+        // Wheel -> horizontal scroll when over viewport
+        if (viewport) {
+            viewport.addEventListener('wheel', function (ev) {
+                if (Math.abs(ev.deltaY) > Math.abs(ev.deltaX)) {
+                    ev.preventDefault();
+                    viewport.scrollLeft += ev.deltaY;
+                }
+            }, { passive: false });
+        }
+
+        // Arrow keys -> horizontal scroll
+        window.addEventListener('keydown', function (ev) {
+            if (['ArrowLeft','ArrowRight','PageUp','PageDown','Home','End'].includes(ev.key)) {
+                const tag = document.activeElement && document.activeElement.tagName;
+                if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement.isContentEditable) return;
+                if (ev.key === 'ArrowLeft') { ev.preventDefault(); scrollByDelta(-150); }
+                if (ev.key === 'ArrowRight') { ev.preventDefault(); scrollByDelta(150); }
+                if (ev.key === 'PageUp') { ev.preventDefault(); scrollByDelta(-viewport.clientWidth * 0.8); }
+                if (ev.key === 'PageDown') { ev.preventDefault(); scrollByDelta(viewport.clientWidth * 0.8); }
+                if (ev.key === 'Home') { ev.preventDefault(); viewport.scrollLeft = 0; }
+                if (ev.key === 'End') { ev.preventDefault(); viewport.scrollLeft = viewport.scrollWidth; }
+            }
+        });
     });
 </script>
 
